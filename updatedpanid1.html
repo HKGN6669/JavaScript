@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Original Style PAN Card Generator</title>
+<style>
+    body {
+        margin: 0;
+        font-family: 'Tahoma', Geneva, Verdana, sans-serif;
+        background: #eee;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        padding: 30px 10px;
+        min-height: 100vh;
+    }
+    .container {
+        display: flex;
+        gap: 30px;
+        max-width: 1000px;
+        width: 100%;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .form-section {
+        background: #fff;
+        padding: 25px 30px;
+        border-radius: 7px;
+        box-shadow: 0 4px 25px rgba(0,0,0,0.15);
+        width: 350px;
+        box-sizing: border-box;
+    }
+    .form-section h2 {
+        margin: 0 0 20px 0;
+        color: #0055a4;
+        font-weight: 700;
+        font-size: 24px;
+        text-align: center;
+    }
+    label {
+        display: block;
+        margin-top: 15px;
+        font-weight: 600;
+        font-size: 13px;
+        color: #004080;
+    }
+    input[type="text"],
+    input[type="date"],
+    input[type="file"] {
+        width: 100%;
+        padding: 8px 10px;
+        margin-top: 5px;
+        border: 1px solid #a0a0a0;
+        border-radius: 4px;
+        font-size: 14px;
+        box-sizing: border-box;
+        transition: border-color 0.3s;
+    }
+    input[type="text"]:focus,
+    input[type="date"]:focus,
+    input[type="file"]:focus {
+        border-color: #004080;
+        outline: none;
+    }
+    button {
+        margin-top: 25px;
+        width: 100%;
+        background-color: #004080;
+        border: none;
+        padding: 12px;
+        border-radius: 6px;
+        font-weight: 700;
+        font-size: 17px;
+        color: #fff;
+        cursor: pointer;
+        box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+        transition: background-color 0.3s ease;
+    }
+    button:hover {
+        background-color: #002a55;
+    }
+    .pan-card {
+        position: relative;
+        width: 530px;
+        height: 450px;
+        background: #f7eedb;
+        border: 3px solid #392f1b;
+        border-radius: 10px;
+        box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+        box-sizing: border-box;
+        padding: 20px 25px 30px 25px;
+        color: #3b2f1b;
+        display: flex;
+        flex-direction: column;
+        font-size: 13px;
+        background-image: linear-gradient(135deg, #f9f8f2 40%, #e5ddbf 80%);
+    }
+    .pan-card-header {
+        background: #e0ce6a;
+        color: #3b2f1b;
+        border-radius: 6px;
+        padding: 8px 15px;
+        font-weight: 700;
+        font-size: 16px;
+        letter-spacing: 1.3px;
+        text-align: center;
+        user-select: none;
+        box-shadow: inset 0 -6px 10px rgba(0,0,0,0.1);
+        margin-bottom: 15px;
+        font-family: 'Times New Roman', Times, serif;
+        text-transform: uppercase;
+        text-shadow: 1px 1px 0 #927c35;
+    }
+    .emblem {
+        position: absolute;
+        top: 23px;
+        left: 25px;
+        width: 60px;
+        height: 60px;
+        background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Emblem_of_India.svg/1200px-Emblem_of_India.svg.png');
+        background-size: contain;
+        background-repeat: no-repeat;
+        filter: drop-shadow(0 0 1px rgba(0,0,0,0.15));
+        border-radius: 3px;
+    }
+    .govt-text {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 15px;
+        padding: 0 25px 0 90px;
+        user-select: none;
+        color: #5a5332;
+        font-family: 'Georgia', serif;
+    }
+    .govt-text div {
+        width: 48%;
+        font-weight: 600;
+        font-size: 12px;
+        line-height: 1.2;
+    }
+    .govt-text div span.hindi {
+        font-family: 'Mangal', 'Noto Sans Devanagari', 'Arial Unicode MS', sans-serif;
+        font-weight: 700;
+        font-size: 13px;
+        display: block;
+        margin-bottom: 4px;
+        letter-spacing: 0.04em;
+        color: #4a4531;
+    }
+    .pan-heading {
+        text-align: center;
+        font-weight: 800;
+        font-size: 18px;
+        margin: 5px 0 20px 0;
+        letter-spacing: 1.6px;
+        user-select: none;
+        font-family: 'Georgia', serif;
+        color: #4a4531;
+        text-transform: uppercase;
+    }
+    .pan-number {
+        font-weight: 900;
+        font-size: 26px;
+        letter-spacing: 6px;
+        text-align: center;
+        margin: 15px 0 50px;
+        color: #a33800;
+        font-family: 'Courier New', Courier, monospace;
+        user-select: text;
+        text-shadow: 1px 1px 0px #cf906a;
+    }
+    .details {
+        margin-top: 0;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 1.3;
+        padding: 0 40px 0 25px;
+        flex-grow: 1;
+        user-select: none;
+        color: #4a4531;
+        font-family: 'Georgia', serif;
+    }
+    .details b {
+        font-weight: 700;
+        display: block;
+        margin-bottom: 5px;
+        user-select: text;
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
+    }
+    .details .field {
+        margin-bottom: 20px;
+        user-select: text;
+    }
+    .signature {
+        font-style: italic;
+        font-size: 12px;
+        text-align: right;
+        margin-top: 5px;
+        margin-right: 10px;
+        letter-spacing: 1px;
+        user-select: none;
+        font-family: 'Georgia', serif;
+        color: #6a5b2d;
+    }
+    .photo {
+        position: absolute;
+        bottom: 30px;
+        right: 25px;
+        width: 110px;
+        height: 130px;
+        border: 3px solid #5a4d1a;
+        border-radius: 8px;
+        background-color: white;
+        overflow: hidden;
+        box-shadow: inset 0 0 8px rgba(0,0,0,0.2);
+    }
+    .photo img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    #photoPreview {
+        display: none;
+    }
+    @media (max-width: 900px) {
+        .container {
+            flex-direction: column;
+            align-items: center;
+        }
+        .form-section, .pan-card {
+            width: 90vw;
+            max-width: 530px;
+        }
+        .pan-card {
+            height: auto;
+            padding-bottom: 60px;
+        }
+    }
+</style>
+<script>
+    function generatePAN() {
+        const candidateName = document.getElementById("candidateName").value.trim().toUpperCase();
+        const fatherName = document.getElementById("fatherName").value.trim().toUpperCase();
+        const motherName = document.getElementById("motherName").value.trim().toUpperCase();
+        const aadhaar = document.getElementById("aadhaar").value.trim();
+        const dob = document.getElementById("dob").value;
+
+        // Basic validations
+        if (
+            candidateName.length < 3 ||
+            fatherName.length < 1 ||
+            motherName.length < 1 ||
+            aadhaar.length !== 12 ||
+            !dob
+        ) {
+            alert("Please enter valid details for all fields. Aadhaar must be 12 digits.");
+            return;
+        }
+
+        // Extract first 3 letters of surname (last word of candidateName)
+        const candidateNameParts = candidateName.split(" ");
+        const surname = candidateNameParts[candidateNameParts.length - 1];
+        const first3Surname = surname.substring(0, 3);
+
+        // First letter of father's name
+        const firstLetterFather = fatherName.charAt(0);
+
+        // Fixed 5th letter 'P' (individual)
+        const fifthLetter = 'P';
+
+        // Generate random 4 digit number
+        // const randomNum = Math.floor(1000 + Math.random() * 9000);
+
+        // Generate last letter alphabetically randomly
+        // const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        // const lastLetter = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
+
+        // const pan = first3Surname + firstLetterFather + fifthLetter + randomNum + lastLetter;
+        const pan = "HEMRP2480Q";
+
+        const dobDate = new Date(dob);
+        const dobFormatted =
+            ("0" + dobDate.getDate()).slice(-2) +
+            "/" +
+            ("0" + (dobDate.getMonth() + 1)).slice(-2) +
+            "/" +
+            dobDate.getFullYear();
+
+        function splitName(name) {
+            const parts = name.split(" ");
+            const first = parts[0] || "";
+            const middle = parts.length > 2 ? parts.slice(1, parts.length - 1).join(" ") : "";
+            const surname = parts.length > 1 ? parts[parts.length - 1] : "";
+            return { first, middle, surname };
+        }
+
+        const candidateSplit = splitName(candidateName);
+        const fatherSplit = splitName(fatherName);
+
+        const panCardHTML = `
+            <div class="emblem" aria-hidden="true"></div>
+            <div class="pan-card-header" aria-label="Permanent Account Number Card">Permanent Account Number Card</div>
+            <div class="govt-text" role="presentation">
+                <div><span class="hindi">आयकर विभाग</span>INCOME TAX DEPARTMENT</div>
+                <div><span class="hindi">भारत सरकार</span>GOVT OF INDIA</div>
+            </div>
+            <div aria-label="PAN holder's details" class="details">
+                <div class="field"><b>Name as per PAN Card</b> ${candidateSplit.first} ${candidateSplit.middle} ${candidateSplit.surname}</div>
+                <div class="field"><b>Father's Name</b> ${fatherSplit.first} ${fatherSplit.middle} ${fatherSplit.surname}</div>
+                <div class="field"><b>Date of Birth</b> ${dobFormatted}</div>
+            </div>
+            <div class="pan-number" role="region" aria-label="Permanent Account Number">${pan}</div>
+            <div class="signature" aria-label="PAN holder signature">Signature of PAN Holder</div>
+            <div class="photo" aria-label="PAN holder photo"><img id="panPhoto" src="" alt="PAN Holder Photo"></div>
+        `
+
+        document.getElementById("panCard").innerHTML = panCardHTML;
+
+        const photoSrc = document.getElementById("photoPreview").src;
+        if (photoSrc && photoSrc !== "") {
+            document.getElementById("panPhoto").src = photoSrc;
+        } else {
+            document.getElementById("panPhoto").src = "";
+        }
+    }
+
+    function previewPhoto(event) {
+        const reader = new FileReader();
+        reader.onload = function () {
+            const output = document.getElementById("photoPreview");
+            output.src = reader.result;
+            output.style.display = "block";
+        };
+        if(event.target.files[0]){
+            reader.readAsDataURL(event.target.files[0]);
+        }
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+        const dobInput = document.getElementById("dob");
+        dobInput.max = new Date().toISOString().split("T")[0];
+    });
+</script>
+</head>
+<body>
+<div class="container">
+    <section class="form-section" aria-label="PAN Card information entry form">
+        <h2>PAN Card Application</h2>
+        <label for="candidateName">Candidate Name</label>
+        <input type="text" id="candidateName" placeholder="Enter full name" autocomplete="name" required />
+        <label for="fatherName">Father's Name</label>
+        <input type="text" id="fatherName" placeholder="Enter father's name" autocomplete="name" required />
+        <label for="motherName">Mother's Name</label>
+        <input type="text" id="motherName" placeholder="Enter mother's name" autocomplete="name" required />
+        <label for="aadhaar">Aadhaar Number</label>
+        <input type="text" id="aadhaar" placeholder="Enter Aadhaar number" pattern="\\d{12}" maxlength="12" inputmode="numeric" required />
+        <label for="dob">Date of Birth</label>
+        <input type="date" id="dob" required />
+        <label for="photoUpload">Upload Photo</label>
+        <input type="file" id="photoUpload" accept="image/*" onchange="previewPhoto(event)" aria-describedby="photoHelp" />
+        <small id="photoHelp" style="color:#666;">Upload a clear passport size photo</small>
+        <img id="photoPreview" alt="Uploaded photo preview" />
+        <button type="button" onclick="generatePAN()">Generate PAN Card</button>
+    </section>
+    <aside class="pan-card" role="region" aria-live="polite" aria-label="Generated PAN Card details" id="panCard">
+    </aside>
+</div>
+</body>
+</html>

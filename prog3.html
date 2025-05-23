@@ -1,16 +1,20 @@
 <html>
-    <head></head>
-    <body>
-        <h1>Hello Students</h1>
-        <button onclick="a()">click me to see stmt</button><br><br>
-        <button onclick="b()">click me to print this page</button>
+    <head>
         <script>
-           function a(){
-            alert("Hello");
-           } 
-           function b(){
-            window.print();
-           } 
+            function a(){
+                  var a=document.getElementById('a').value;
+                  var res="";
+                  for(var i=0;i<a.length;i++)
+                  {
+                    res=a.charAt(i)+res;
+                  }
+                  document.write(res);
+            }
         </script>
+    </head>
+    <body>
+        <h1>Enter the String to Resverse</h1>
+        Enter String:<input type="text" id="a">
+        <button onclick="a()">click me to  see the string</button>
     </body>
 </html>

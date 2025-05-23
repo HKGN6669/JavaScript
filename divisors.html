@@ -3,9 +3,12 @@
         <script>
             function a(){
                 var x=parseInt(document.getElementById('r').value);
+                document.write("Divisors are : ")
                 for(var i=0;i<x;i++)
             {
-                document.writeln(i+" ");
+                if((x%i)==0){
+                    document.writeln(i+" ");
+                }
             }
             }
         </script>

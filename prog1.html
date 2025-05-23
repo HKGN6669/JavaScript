@@ -1,9 +1,15 @@
 <html>
-    <head></head>
-    <body>
-        <h1 id="a"></h1>
+    <head>
         <script>
-            document.getElementById('a').innerHTML="Hello Students";
+            function a(){
+                  var a=document.getElementById('a').value;
+                  document.getElementById("s").innerHTML="String is : "+a;
+            }
         </script>
+    </head>
+    <body>
+        Enter String:<input type="text" id="a">
+        <h1 id="s"></h1>
+        <button onclick="a()">click me to  see the string</button>
     </body>
 </html>

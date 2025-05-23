@@ -1,12 +1,22 @@
 <html>
-    <head></head>
-    <body>
-        <h1 id="a">Mother Teresa Institute Of Engineering</h1>
-        <button onclick="a()">click me to modify the content in h1 tag</button>
+    <head>
         <script>
-           function a(){
-             document.getElementById('a').style.display="none";
-           } 
+            function a(){
+                var x=document.getElementById('myInput1').value;
+                var y=document.getElementById('myInput2').value;
+                if(x=== "" || y=== ""){
+                    alert("Please enter both values");
+                    return
+                }
+                x=Number(x);
+                y=Number(y);
+                alert("x =" + x + " y = " + y);
+            }
         </script>
+    </head>
+    <body>
+        Enter Num1:<input type="number" id="myInput1"><br>
+        Enter Num2:<input type="number" id="myInput2"><br>
+        <button onclick="a()">click me</button>
     </body>
 </html>
